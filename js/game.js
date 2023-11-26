@@ -23,6 +23,9 @@ var TIME_FRUITS = 0;
 
 var HELP_DELAY = 1500;
 var HELP_TIMER = -1;
+
+const readId = readUrlParams();
+console.log({readId});
 			
 function blinkHelp() { 
 	if ( $('.help-button').attr("class").indexOf("yo") > -1 ) { 
