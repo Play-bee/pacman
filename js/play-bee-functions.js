@@ -15,3 +15,25 @@ function readUrlParams() {
 	if (PLAYER_ID) return true;
 	return false;
 }
+
+function sendResult(score, level, timePlayed) {
+	const currentDate = new Date();
+	const gameStats = {
+		playerId: PLAYER_ID,
+		score: score,
+		level: level,
+		timePlayed: timePlayed,
+		date: currentDate.toISOString(),
+	};
+	console.log("Juego finalizado", gameStats);
+	fetch("http://localhost:3001/game-over", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(gameStats),
+	})
+		.then((response) => response.json())
+		.then((data) => console.log("Respuesta del servidor:", data))
+		.catch((error) => console.error("Error al realizar la solicitud POST:", error));
+}

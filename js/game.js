@@ -296,6 +296,8 @@ function gameover() {
 	resetPacman();
 	resetGhosts();
 	
+	sendResult(SCORE, LEVEL, TIME_GAME);
+	
 	TIME_GAME = 0;
 	TIME_LEVEL = 0;
 	TIME_LIFE = 0;
