@@ -16,7 +16,7 @@ function readUrlParams() {
 	return false;
 }
 
-function sendResult(score, level, timePlayed) {
+async function sendResult(score, level, timePlayed) {
 	const currentDate = new Date();
 	const gameStats = {
 		playerId: PLAYER_ID,
@@ -26,14 +26,15 @@ function sendResult(score, level, timePlayed) {
 		date: currentDate.toISOString(),
 	};
 	console.log("Juego finalizado", gameStats);
-	fetch("http://localhost:3001/game-over", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(gameStats),
-	})
-		.then((response) => response.json())
-		.then((data) => console.log("Respuesta del servidor:", data))
-		.catch((error) => console.error("Error al realizar la solicitud POST:", error));
+	const response = await fetch("https://localhost:8000/tournaments/game-over", {
+    method: "POST",
+		mode: "cors",
+		credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(gameStats),
+  });
+  const data = await response.json();
+  console.log("Response:", data);
 }
