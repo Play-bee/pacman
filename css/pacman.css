@@ -1,3 +1,12 @@
+@media screen and (min-height: 450px) { 
+	#panel, #home { 
+		zoom: 75%;
+	}
+	h1 {
+		color: red;
+	}
+}
+
 ::-webkit-scrollbar { 
 	width: 16px;
 }
@@ -27,7 +36,10 @@ html, body {
 	padding: 0px 0px 0px 0px;
 	width: 100%;
 	height: 100%;
+	display: flex;
+    align-items: center;
 }
+
 html  { 
 	background-color: #000;
 }
@@ -39,7 +51,7 @@ body {
 #score, #highscore  { 
 	position: absolute;
 	display: inline;
-	top: 70px;
+	top: 40px;
 	margin: 0px;
 	padding: 0px;
 	width: 160px;
@@ -94,8 +106,11 @@ span.combo, span.fruits {
 }
 
 #panel, #home { 
-	width: 550px;
-	height: 690px;
+	/* width: 550px;
+	height: 690px; */
+	width: 450px;
+	height: 450px;
+
 	margin: auto;
 	margin-top: 10px;
 	left: 0px;
@@ -105,9 +120,10 @@ span.combo, span.fruits {
 	background-color: #000;
 }			
 #board, #canvas-board, #canvas-paths, #canvas-fruits, #canvas-pacman, #canvas-bubbles, #canvas-ghost-blinky, #canvas-ghost-pinky, #canvas-ghost-inky, #canvas-ghost-clyde { 
-	width: 550px;
-	height: 550px;
+	width: 450px;
+	height: 450px;
 	position: absolute;
+	margin: 0 auto;
 }
 #canvas-paths { 
 	display: none;
@@ -118,7 +134,7 @@ span.combo, span.fruits {
 
 #canvas-lifes, #canvas-level-fruits { 
 	height: 30px;
-	top: 670px;
+	top: 570px;
 	position: absolute;
 	z-index: 111111;
 }
@@ -137,7 +153,7 @@ span.combo, span.fruits {
 	left: 0px;
 	right: 0px;
 	bottom: -145px;
-	width: 550px;
+	width: 450px;
 	height: 140px;
 	background-color: #666;
 	opacity: 0.7;
@@ -230,7 +246,7 @@ span.combo, span.fruits {
 
 
 h1 { 
-	margin: 0px 0px 74px 0px;
+	margin: 0px 0px 40px 0px;
 	padding: 0px;
 	font-size: 24px;
 	letter-spacing: 3px;
@@ -259,7 +275,7 @@ h3 {
 	right: 5px;
 }
 #panel .sound { 
-	top: 77px;
+	top: 45px;
 	right: 5px;
 }
 
@@ -308,7 +324,7 @@ h3 {
 	color: #333;
 }
 #panel .help-button { 
-	top: -510px;
+	top: -440px;
 	height: 25px;
 }
 
@@ -365,13 +381,16 @@ h3 {
 
 
 
-@media screen and (min-height:1200px), screen and (min-device-height : 1200px) { 
+/* @media screen and (min-height: 450px) { 
 	#panel, #home { 
 		zoom: 135%;
 	}
-}
+	h1 {
+		color: red;
+	}
+} */
 
-@media screen and (max-width:1024px), screen and (min-device-width : 768px) and (max-device-width : 1024px) { 
+/* @media screen and (max-width:1024px), screen and (min-device-width : 768px) and (max-device-width : 1024px) { 
 	#home .help-button, #panel .help-button, #home .github, #sound, .sound { 
 		display: none;
 	}
@@ -414,11 +433,12 @@ h3 {
 		padding-top: 50px;
 	}
 	#canvas-lifes, #canvas-level-fruits { 
-		top: 607px;
+	
+		top: 580px;
 	}
 	#control { 
 		bottom: 50px;
-		width: 550px;
+		width: 450px;
 		height: 55px;
 	}
 	#control-up, #control-down, #control-left, #control-right { 
@@ -432,4 +452,4 @@ h3 {
 	#message { 
 		top: 347px;
 	}
-}
+} */
