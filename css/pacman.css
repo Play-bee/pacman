@@ -2,9 +2,6 @@
 	#panel, #home { 
 		zoom: 75%;
 	}
-	h1 {
-		color: red;
-	}
 }
 
 ::-webkit-scrollbar { 
@@ -42,7 +39,8 @@ html, body {
 }
 
 html  { 
-	background-color: #000;
+	/* background-color: #000; */
+	background-color: #181a20f0;
 }
 body { 
 	position: relative;
@@ -118,7 +116,9 @@ span.combo, span.fruits {
 	right: 0px;
 	position: absolute;
 	padding: 5px 10px 10px 10px;
-	background-color: #000;
+	/* background-color: #000; */
+	background: none;
+
 }			
 #board, #canvas-board, #canvas-paths, #canvas-fruits, #canvas-pacman, #canvas-bubbles, #canvas-ghost-blinky, #canvas-ghost-pinky, #canvas-ghost-inky, #canvas-ghost-clyde { 
 	width: 450px;
