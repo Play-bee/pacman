@@ -25,7 +25,10 @@ var HELP_DELAY = 1500;
 var HELP_TIMER = -1;
 
 const readId = readUrlParams();
-console.log({readId});
+const readTournamentId = readUrlTournamentParams();
+
+// console.log({readId});
+// console.log({readTournamentId});
 			
 function blinkHelp() { 
 	if ( $('.help-button').attr("class").indexOf("yo") > -1 ) { 
@@ -296,7 +299,7 @@ function gameover() {
 	resetPacman();
 	resetGhosts();
 	
-	sendResult(SCORE, LEVEL, TIME_GAME);
+	// sendResult(SCORE, LEVEL, TIME_GAME);
 	
 	TIME_GAME = 0;
 	TIME_LEVEL = 0;
