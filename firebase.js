@@ -8,14 +8,12 @@ const firebaseConfig = {
     storageBucket: "play-bee-games.appspot.com",
     messagingSenderId: "635108761101",
     appId: "1:635108761101:web:348f8bdc817edf17147f44"  
-  }
+}
 
-  const app = initializeApp(firebaseConfig);
-  const firebaseConnect = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const firebaseConnect = getFirestore(app);
 
-  console.log('app',app);
-
-  var winners = [];
+var winners = [];
 
 export async function updateTournament(change) {
   const createdTournamentDocRef = await doc(firebaseConnect, `Tournaments/${change.tournamentId}`);
@@ -23,7 +21,23 @@ export async function updateTournament(change) {
   const updatedTournament = currentTournamentRef.data();
   updatedTournament.alreadyPlayed = updatedTournament.alreadyPlayed;
 
-  updatedTournament.results.push(change);
+  const result = {
+    date: change.date,
+    positionresult: 0,
+    userEmail: change.email,
+    userId: change.id,
+    userUid: change.userUid,
+    winQty: 0,
+    restult: {
+      date: change.date,
+      qtyWin: 0,
+      score: change.score,
+      level: change.level,
+      timePlayed: change.timePlayed
+    }
+  }
+
+  updatedTournament.results.push(result);
   console.log('updatedTournament', updatedTournament)
 
   const playerIsInTournament = updatedTournament.registeredPlayers.some(x => x.id === change.id);
@@ -65,12 +79,12 @@ async function getWinners(tournament) {
   let numberOfWinners = await calculateNumberOfWinners(tournament.registeredPlayers.length);
   let sortedPlayers = await calculateResults(tournament);
 
-  this.winners = await sortedPlayers.slice(0, numberOfWinners);
-  const premios = await repartirPremios(tournament.totalCollected, this.winners);
+  winners = await sortedPlayers.slice(0, numberOfWinners);
+  const premios = await repartirPremios(tournament.totalCollected, winners);
 
-  for (let i = 0; i < this.winners.length; i++) {
-    this.winners[i].winQty = premios[i];
-    this.winners[i].position = i;
+  for (let i = 0; i < winners.length; i++) {
+    winners[i].winQty = premios[i];
+    winners[i].position = i;
   }
   return;
 }
@@ -89,24 +103,24 @@ function calculateNumberOfWinners(totalPlayers) {
 
 function calculateResults(tournament) {
   tournament.results.sort((a, b) => {
-    if (a.result.crowns > b.result.crowns) {
+    if (a.result.level > b.result.level) {
       return -1;
     }
-    if (a.result.crowns < b.result.crowns) {
+    if (a.result.level < b.result.level) {
       return 1;
     }
     // Si valor1 es igual, ordenamos por valor2
-    if (a.result.trophyChange > b.result.trophyChange) {
+    if (a.result.score > b.result.score) {
       return -1;
     }
-    if (a.result.trophyChange < b.result.trophyChange) {
+    if (a.result.score < b.result.score) {
       return 1;
     }
     // Si valor2 también es igual, ordenamos por valor3
-    if (a.result.kingTowerHitPoints > b.result.kingTowerHitPoints) {
+    if (a.result.timePlayed > b.result.timePlayed) {
       return -1;
     }
-    if (a.result.kingTowerHitPoints < b.result.kingTowerHitPoints) {
+    if (a.result.timePlayed < b.result.timePlayed) {
       return 1;
     }
     return 0; // Todos los valores son iguales
