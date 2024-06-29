@@ -18,16 +18,13 @@ const firebaseConfig = {
   var winners = [];
 
 export async function updateTournament(change) {
-  console.log('funcion del modulo')
-  console.log('change', change)
-
   const createdTournamentDocRef = await doc(firebaseConnect, `Tournaments/${change.tournamentId}`);
   const currentTournamentRef = await getDoc(createdTournamentDocRef);
   const updatedTournament = currentTournamentRef.data();
   updatedTournament.alreadyPlayed = updatedTournament.alreadyPlayed;
-  console.log('currentTournament', updatedTournament)
 
   updatedTournament.results.push(change);
+  console.log('updatedTournament', updatedTournament)
 
   const playerIsInTournament = updatedTournament.registeredPlayers.some(x => x.id === change.playerId);
   if(!playerIsInTournament) {
@@ -49,6 +46,12 @@ export async function updateTournament(change) {
       }
   } else {
     if(updatedTournament && updatedTournament.id) {
+      updatedTournament.registeredPlayers.map((player) => {
+        if(player.id === change.id) {
+          player.played = true;
+        }
+      });
+      
       updateOneCreatedTournament(updatedTournament.id, updatedTournament);
     }
   }
