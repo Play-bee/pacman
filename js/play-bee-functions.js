@@ -16,14 +16,14 @@ function getParameterByName(name) {
 
 function readUrlParams() {
 	PLAYER_ID = getParameterByName("playerId");
-	// console.log({ PLAYER_ID });
+	console.log('playerid', { PLAYER_ID });
 	if (PLAYER_ID) return true;
 	return false;
 }
 
 function readUrlTournamentParams() {
 	TOURNAMENT_ID = getParameterByName("tournamentId");
-	// console.log({ TOURNAMENT_ID });
+	console.log('tournamentId',{ TOURNAMENT_ID });
 	if (TOURNAMENT_ID) return true;
 	return false;
 }
@@ -39,8 +39,8 @@ function sendResult(score, level, timePlayed) {
 		tournamentId: TOURNAMENT_ID
 	};
 
-	// console.log("Juego finalizado", gameStats);
-	updateOneCreatedTournament(gameStats)
+	console.log("Juego finalizado - stats", gameStats);
+	// updateOneCreatedTournament(gameStats)
 
 	 // fetch("http://34.28.220.88:8000/tournaments/game-over", {
 	// 	method: "POST",
