@@ -26,9 +26,13 @@ var HELP_TIMER = -1;
 
 const readId = readUrlParams();
 const readTournamentId = readUrlTournamentParams();
+var MILISECONDS = 0;
 
-// console.log({readId});
-// console.log({readTournamentId});
+setInterval(() => {
+	if(!GAMEOVER) {
+		MILISECONDS++
+	}
+}, 100);
 			
 function blinkHelp() { 
 	if ( $('.help-button').attr("class").indexOf("yo") > -1 ) { 
@@ -39,7 +43,6 @@ function blinkHelp() {
 }
 
 function initGame(newgame) { 
-
 	if (newgame) { 
 		stopPresentation();
 		stopTrailer();
@@ -80,6 +83,7 @@ function initGame(newgame) {
 		ctx.arc(x, y, 4, 0, 2 * Math.PI, false);
 		ctx.fill();
 		ctx.closePath();
+
 	}
 
 	initBoard();
@@ -298,8 +302,7 @@ function gameover() {
 	
 	resetPacman();
 	resetGhosts();
-	
-	sendResult(SCORE, LEVEL, TIME_GAME);
+	sendResult(SCORE, LEVEL, MILISECONDS);
 	
 	TIME_GAME = 0;
 	TIME_LEVEL = 0;
@@ -329,6 +332,7 @@ function score(s, type) {
 		$('#score span').html("00");
 	} else { 
 		$('#score span').html(SCORE);
+		
 	}
 	
 	var scoreAfter = (SCORE / 10000) | 0;

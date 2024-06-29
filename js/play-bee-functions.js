@@ -40,7 +40,9 @@ function sendResult(score, level, timePlayed) {
 	};
 
 	console.log("Juego finalizado - stats", gameStats);
-	// updateOneCreatedTournament(gameStats)
+
+	
+	//updateOneCreatedTournament(gameStats)
 
 	 // fetch("http://34.28.220.88:8000/tournaments/game-over", {
 	// 	method: "POST",
