@@ -24,8 +24,11 @@ var TIME_FRUITS = 0;
 var HELP_DELAY = 1500;
 var HELP_TIMER = -1;
 
-const readId = readUrlParams();
+const readId = readIdUrlParams();
+const readUid = readUidUrlParams();
 const readTournamentId = readUrlTournamentParams();
+const readEmail = readUrlEmailParams();
+
 var MILISECONDS = 0;
 
 setInterval(() => {
@@ -34,7 +37,7 @@ setInterval(() => {
 	}
 }, 100);
 			
-function blinkHelp() { 
+ function blinkHelp() { 
 	if ( $('.help-button').attr("class").indexOf("yo") > -1 ) { 
 		$('.help-button').removeClass("yo");
 	} else { 
@@ -42,7 +45,7 @@ function blinkHelp() {
 	}
 }
 
-function initGame(newgame) { 
+ function initGame(newgame) { 
 	if (newgame) { 
 		stopPresentation();
 		stopTrailer();
@@ -109,7 +112,7 @@ function initGame(newgame) {
 	ready();
 }
 
-function win() { 
+ function win() { 
 	stopAllSound();
 
 	LOCK = true;
@@ -123,7 +126,7 @@ function win() {
 	setTimeout("prepareNextLevel()", 1000);
 
 }
-function prepareNextLevel(i) { 
+ function prepareNextLevel(i) { 
 	if ( LEVEL_NEXT_TIMER === -1 ) { 
 		eraseBoardDoor();
 		LEVEL_NEXT_TIMER = setInterval("prepareNextLevel()", 250);
@@ -139,7 +142,7 @@ function prepareNextLevel(i) {
 		}
 	}
 }
-function nextLevel() { 
+ function nextLevel() { 
 	LOCK = false;
 	
 	LEVEL ++;
@@ -157,8 +160,7 @@ function nextLevel() {
 	TIME_FRUITS = 0;
 }
 
-
-function retry() { 
+ function retry() { 
 	stopTimes();
 
 	erasePacman();
@@ -183,7 +185,7 @@ function ready() {
 	playReadySound();
 	setTimeout("go()", "4100");
 }
-function go() { 
+ function go() { 
 	playSirenSound();
 
 	LOCK = false;
@@ -202,7 +204,7 @@ function startTimes() {
 		TIME_GENERAL_TIMER = setInterval("times()", 1000);
 	}
 }
-function times() { 
+ function times() { 
 	TIME_GAME ++;
 	TIME_LEVEL ++;
 	TIME_LIFE ++;
@@ -233,7 +235,7 @@ function stopTimes() {
 	}
 }
 
-function pauseGame() { 
+ function pauseGame() { 
 
 	if (!PAUSE) { 
 		stopAllSound();
@@ -247,7 +249,7 @@ function pauseGame() {
 		stopBlinkSuperBubbles();
 	}
 }
-function resumeGame() { 
+ function resumeGame() { 
 	if (PAUSE) { 
 		testStateGhosts();
 
@@ -292,7 +294,7 @@ function lifes(l) {
 	}
 }
 
-function gameover() { 
+ function gameover() { 
 	GAMEOVER = true;
 	message("game over");
 	stopTimes();

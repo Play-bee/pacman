@@ -1,9 +1,22 @@
-// import { updateOneCreatedTournament } from '../firebase'
+// import { updateTournament } from '../firebase.js'
 // import { collection, getFirestore, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // const db = getFirestore();
 
-var PLAYER_ID = null;
+// var PLAYER_ID = null;
+// var PLAYER_UID = null;
+// var TOURNAMENT_ID = null;
+// var EMAIL = null;
+var firebaseFc;
+
+document.addEventListener('DOMContentLoaded', function() {
+	import('../firebase.js').then(module => {
+		firebaseFc = module; // Llamada a la función exportada desde el módulo
+	}).catch(err => {
+		console.error("Error al cargar el módulo:", err);
+	});
+});
+
 
 function getParameterByName(name) {
 	name = name.replace(/[\[\]]/g, "\\$&");
@@ -14,10 +27,17 @@ function getParameterByName(name) {
 	return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function readUrlParams() {
+function readIdUrlParams() {
 	PLAYER_ID = getParameterByName("playerId");
 	console.log('playerid', { PLAYER_ID });
 	if (PLAYER_ID) return true;
+	return false;
+}
+
+function readUidUrlParams() {
+	PLAYER_UID = getParameterByName("playerUid");
+	console.log('playerUid', { PLAYER_UID });
+	if (PLAYER_UID) return true;
 	return false;
 }
 
@@ -28,21 +48,28 @@ function readUrlTournamentParams() {
 	return false;
 }
 
+function readUrlEmailParams() {
+	EMAIL = getParameterByName("email");
+	console.log('email',{ EMAIL });
+	if (EMAIL) return true;
+	return false;
+}
+
 function sendResult(score, level, timePlayed) {
 	const currentDate = new Date();
 	const gameStats = {
-		playerId: PLAYER_ID,
+		id: PLAYER_ID,
+		tournamentId: TOURNAMENT_ID,
+		userUid: PLAYER_UID,
+		email: EMAIL,
 		score: score,
 		level: level,
 		timePlayed: timePlayed,
 		date: currentDate.toISOString(),
-		tournamentId: TOURNAMENT_ID
 	};
 
 	console.log("Juego finalizado - stats", gameStats);
-
-	
-	//updateOneCreatedTournament(gameStats)
+	firebaseFc.updateTournament(gameStats);
 
 	 // fetch("http://34.28.220.88:8000/tournaments/game-over", {
 	// 	method: "POST",
