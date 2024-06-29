@@ -28,8 +28,10 @@ export async function updateTournament(change) {
 
   const playerIsInTournament = updatedTournament.registeredPlayers.some(x => x.id === change.id);
   if(!playerIsInTournament) {
+    console.log('retunr')
     return;
   }
+  console.log(' no retunr')
 
 
   const notAllPlayed = updatedTournament.registeredPlayers.some(x => x.played ===  false);
@@ -46,6 +48,8 @@ export async function updateTournament(change) {
       }
   } else {
     if(updatedTournament && updatedTournament.id) {
+      console.log(' no retunr', updatedTournament)
+
       updatedTournament.registeredPlayers.map((player) => {
         if(player.id === change.id) {
           player.played = true;
@@ -176,7 +180,9 @@ async function updateUserQty(currentUserPlayBee, player, tournament) {
   tournament.finishDate = new Date().toLocaleDateString();
   tournament.winners.push(newWinnerUser);
 
-  const createdUserDocRef = await doc(this.firestore, `Users/${player.userId}`);
+  console.log('player', currentUserPlayBee)
+
+  const createdUserDocRef = await doc(this.firestore, `Users/${currentUserPlayBee.id}`);
   return await updateDoc(createdUserDocRef, change).then(() => {
     if(tournament.id) {
       updateOneCreatedTournament(tournament.id, tournament)
@@ -186,6 +192,7 @@ async function updateUserQty(currentUserPlayBee, player, tournament) {
 }
 
 async function updateOneCreatedTournament(tournamentId, change) {
+  console.log('updateOneCreatedTournament', change)
   const createdTournamentDocRef = await doc(firebaseConnect, `Tournaments/${tournamentId}`);
   return updateDoc(createdTournamentDocRef, change);
 }
