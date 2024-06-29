@@ -26,7 +26,7 @@ export async function updateTournament(change) {
   updatedTournament.results.push(change);
   console.log('updatedTournament', updatedTournament)
 
-  const playerIsInTournament = updatedTournament.registeredPlayers.some(x => x.id === change.playerId);
+  const playerIsInTournament = updatedTournament.registeredPlayers.some(x => x.id === change.id);
   if(!playerIsInTournament) {
     return;
   }
@@ -51,7 +51,7 @@ export async function updateTournament(change) {
           player.played = true;
         }
       });
-      
+
       updateOneCreatedTournament(updatedTournament.id, updatedTournament);
     }
   }
