@@ -3,7 +3,10 @@
 	font-size: 40px;
 	margin-left: 125px;
 	width: 100%;
+	height: 100px;
+    line-height: 100px;
 }
+
 #home h3 { 
 	position: absolute;
 	margin: auto;
@@ -12,11 +15,13 @@
 	bottom: 15px;
 	text-align: center;
 }
+
 #home h3 em { 
 	font-size: inherit;
 	font-style: inherit;
 	color: #fff200;
 }
+
 #canvas-home-title-pacman { 
 	/* background-color: #000; */
 	background: none;
@@ -27,6 +32,7 @@
 	height: 100px;
 	width: 118px;
 }
+
 #canvas-panel-title-pacman { 
 	/* background-color: #000; */
 	background: none;
