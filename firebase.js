@@ -57,7 +57,7 @@ export async function updateTournament(change) {
 
       await getWinners(updatedTournament);
 
-      for(let player of this.winners) {
+      for(let player of winners) {
         const createdUserDocRef = await doc(firebaseConnect, `Users/${change.userId}`);
         const currentWinnerUser = await getDoc(createdUserDocRef);
 
@@ -193,7 +193,7 @@ async function updateUserQty(currentUserPlayBee, player, tournament) {
   tournament.finishDate = new Date().toLocaleDateString();
   tournament.winners.push(newWinnerUser);
 
-  const createdUserDocRef = await doc(this.firestore, `Users/${currentUserPlayBee.id}`);
+  const createdUserDocRef = await doc(firebaseConnect, `Users/${currentUserPlayBee.id}`);
   return await updateDoc(createdUserDocRef, change).then(() => {
     if(tournament.id) {
       updateOneCreatedTournament(tournament.id, tournament)
