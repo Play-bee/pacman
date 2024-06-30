@@ -28,7 +28,7 @@ export async function updateTournament(change) {
     userId: change.id,
     userUid: change.userUid,
     winQty: 0,
-    restult: {
+    result: {
       date: change.date,
       qtyWin: 0,
       score: change.score,
