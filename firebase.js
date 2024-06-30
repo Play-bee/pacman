@@ -203,13 +203,14 @@ async function updateUserQty(currentUserPlayBee, player, tournament) {
 
 async function updateOneCreatedTournament(tournamentId, change) {
   const createdTournamentDocRef = await doc(firebaseConnect, `Tournaments/${tournamentId}`);
-  return updateDoc(createdTournamentDocRef, change).then(() => {
-    Swal.fire({
-      title: 'Juego finalizado, puedes cerrar esta ventana.',
-      color: '#f2c335',
-      background: '#181a20f0',
-      showCancelButton: false,
-      confirmButtonText: 'OK',
-      })
-  });
+  return updateDoc(createdTournamentDocRef, change)
+  // .then(() => {
+  //   Swal.fire({
+  //     title: 'Juego finalizado, puedes cerrar esta ventana.',
+  //     color: '#f2c335',
+  //     background: '#181a20f0',
+  //     showCancelButton: false,
+  //     confirmButtonText: 'OK',
+  //     })
+  // });
 }

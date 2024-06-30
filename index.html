@@ -5,7 +5,6 @@
 
 		<link rel="stylesheet" type="text/css" href="css/pacman.css" />
 		<link rel="stylesheet" type="text/css" href="css/pacman-home.css" />
-
 		<script type="module"></script>
 
 		<script type="text/javascript" src="js/play-bee-functions.js"></script>		
@@ -154,8 +153,9 @@
 								} else { 
 									pauseGame();
 								}
-							} else if (GAMEOVER) { 
-								initHome();
+							} else if (GAMEOVER) {
+								console.log('fin')
+								// initHome();
 							}
 						//}
 					}
@@ -233,8 +233,6 @@
 			<div class="help-button">- help -</div>
 			<a class="sound" href="javascript:void(0);" data-sound="on"><img src="img/sound-on.png" alt="" border="0"></a>
 		</div>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 	</body>
 	
 </html>
