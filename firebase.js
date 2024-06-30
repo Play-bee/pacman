@@ -38,19 +38,23 @@ export async function updateTournament(change) {
   }
 
   updatedTournament.results.push(result);
-  console.log('updatedTournament', updatedTournament)
 
   const playerIsInTournament = updatedTournament.registeredPlayers.some(x => x.id === change.id);
   if(!playerIsInTournament) {
-    console.log('retunr')
     return;
   }
-  console.log(' no retunr')
+
+  updatedTournament.registeredPlayers.map((player) => {
+    if(player.id === change.id) {
+      player.played = true;
+    }
+  })
 
 
   const notAllPlayed = updatedTournament.registeredPlayers.some(x => x.played ===  false);
 
   if(updatedTournament.maxNumPlayers === updatedTournament.alreadyPlayed && !notAllPlayed) {
+
       await getWinners(updatedTournament);
 
       for(let player of this.winners) {
@@ -62,14 +66,11 @@ export async function updateTournament(change) {
       }
   } else {
     if(updatedTournament && updatedTournament.id) {
-      console.log(' no retunr', updatedTournament)
-
       updatedTournament.registeredPlayers.map((player) => {
         if(player.id === change.id) {
           player.played = true;
         }
       });
-
       updateOneCreatedTournament(updatedTournament.id, updatedTournament);
     }
   }
@@ -155,8 +156,6 @@ function repartirPremios(totalPremio, winners) {
   return premios;
 }
 
-
-
 async function updateUserQty(currentUserPlayBee, player, tournament) {
   const totalCollected = tournament.totalCollected;
 
@@ -194,19 +193,15 @@ async function updateUserQty(currentUserPlayBee, player, tournament) {
   tournament.finishDate = new Date().toLocaleDateString();
   tournament.winners.push(newWinnerUser);
 
-  console.log('player', currentUserPlayBee)
-
   const createdUserDocRef = await doc(this.firestore, `Users/${currentUserPlayBee.id}`);
   return await updateDoc(createdUserDocRef, change).then(() => {
     if(tournament.id) {
       updateOneCreatedTournament(tournament.id, tournament)
     }
   });;
-  
 }
 
 async function updateOneCreatedTournament(tournamentId, change) {
-  console.log('updateOneCreatedTournament', change)
   const createdTournamentDocRef = await doc(firebaseConnect, `Tournaments/${tournamentId}`);
   return updateDoc(createdTournamentDocRef, change);
 }
