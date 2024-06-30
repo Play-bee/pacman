@@ -366,3 +366,4 @@ function score(s, type) {
 		$("#board span.fruits").css('left', (FRUITS_POSITION_X - 14) + 'px');
 	}
 }
+
