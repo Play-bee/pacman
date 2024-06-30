@@ -1,9 +1,6 @@
 import { getFirestore, collection, addDoc, getDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js"
 
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
-
 const firebaseConfig = {
     apiKey: "AIzaSyALlw6lDUJlBqisQg7SiEZsJJv2fugPyNs",
     authDomain: "play-bee-games.firebaseapp.com",

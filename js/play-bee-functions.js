@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 
+
 function getParameterByName(name) {
 	name = name.replace(/[\[\]]/g, "\\$&");
 	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
@@ -55,5 +56,5 @@ function sendResult(score, level, timePlayed) {
 	};
 
 	firebaseFc.updateTournament(gameStats);
-}
 
+}
