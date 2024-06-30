@@ -47,7 +47,7 @@ var GHOST_CLYDE_TRAILER_COLOR = "#f99c00";
 var GHOST_CLYDE_TRAILER_BODY_STATE = 3;
 var GHOST_CLYDE_TRAILER_STATE = 0;
 
-function initHome() { 
+function initHome() {
 	HOME = true;
 	
 	GAMEOVER = false;

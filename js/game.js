@@ -320,6 +320,7 @@ function message(m) {
 	$("#message").html(m);
 	if (m === "game over") $("#message").addClass("red");
 }
+
 function clearMessage() { 
 	$("#message").html("");
 	$("#message").removeClass("red");
