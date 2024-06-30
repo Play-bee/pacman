@@ -58,7 +58,7 @@ export async function updateTournament(change) {
       await getWinners(updatedTournament);
 
       for(let player of winners) {
-        const createdUserDocRef = await doc(firebaseConnect, `Users/${change.userId}`);
+        const createdUserDocRef = await doc(firebaseConnect, `Users/${change.id}`);
         const currentWinnerUser = await getDoc(createdUserDocRef);
 
         const user = await currentWinnerUser.data();
