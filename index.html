@@ -61,7 +61,7 @@
 				});
 				
 				$(".help-button, #help").click(function(e) { 
-					e.stopPropagation();
+					// e.stopPropagation();
 					if (!PACMAN_DEAD && !LOCK && !GAMEOVER) { 
 						if ( $('#help').css("display") === "none") { 
 							$('#help').fadeIn("slow");
@@ -167,7 +167,7 @@
 
 	</head>
 		
-	<body>
+	<body id="body">
 
 		<div id="sound"></div>
 	
@@ -221,22 +221,82 @@
 				<div id="control-left-big"></div>
 				<div id="control-right-big"></div> -->
 			</div>
-			<div id="control">
+			<!-- <div id="control">
 				<div id="control-up"></div>
 				<div id="control-up-second"></div>
 				<div id="control-down"></div> 
 				<div id="control-down-second"></div>
 				<div id="control-left"></div>
 				<div id="control-right"></div>
-			</div>
+			</div> -->
 			<canvas id="canvas-lifes"></canvas>
 			<canvas id="canvas-level-fruits"></canvas>
 			<div id="message"></div>
 			<div class="help-button">- help -</div>
 			<a class="sound" href="javascript:void(0);" data-sound="on"><img src="img/sound-on.png" alt="" border="0"></a>
 		</div>
-		<script type="module" src="touch.js"></script>
+		<!-- <script type="module" src="touch.js"></script> -->
 
+		<script type="text/javascript">
+			let touchStartX = 0;
+			let touchStartY = 0;
+			let touchEndX = 0;
+			let touchEndY = 0;
+	
+			const gameArea = document.getElementById('board');
+			console.log(gameArea)
+	
+			gameArea.addEventListener("touchstart", (e) => {
+				e.preventDefault();
+				touchStartX = e.changedTouches[0].screenX;
+				touchStartY = e.changedTouches[0].screenY;
+			}, { passive: true });
+	
+			gameArea.addEventListener('touchend', (e) => {
+				touchEndX = e.changedTouches[0].screenX;
+				touchEndY = e.changedTouches[0].screenY;
+				handleGesture();
+			}, { passive: true });
+	
+			function handleGesture() {
+				const diffX = touchStartX - touchEndX;
+				const diffY = touchStartY - touchEndY;
+	
+				if (Math.abs(diffX) > Math.abs(diffY)) {
+					if (diffX > 30) {
+						simulateKeydown(37); // Left
+					} else if (diffX < -30) {
+						simulateKeydown(39); // Right
+					}
+				} else {
+					if (diffY > 30) {
+						simulateKeydown(38); // Up
+					} else if (diffY < -30) {
+						simulateKeydown(40); // Down
+					}
+				}
+			}
+	
+			function getKeyByKeyCode(keyCode) {
+				switch (keyCode) {
+					case 37: return 'ArrowLeft';
+					case 38: return 'ArrowUp';
+					case 39: return 'ArrowRight';
+					case 40: return 'ArrowDown';
+					default: return 'Enter';
+				}
+			}
+	
+			function getCodeByKeyCode(keyCode) {
+				switch (keyCode) {
+					case 37: return simulateKeydown(37);
+					case 38: return simulateKeydown(38);
+					case 39: return simulateKeydown(39);
+					case 40: return simulateKeydown(40);
+					default: return 'Enter';
+				}
+			}
+		</script>
 	</body>
 	
 </html>

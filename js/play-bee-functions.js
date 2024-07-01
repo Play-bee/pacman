@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 
-
 function getParameterByName(name) {
 	name = name.replace(/[\[\]]/g, "\\$&");
 	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
