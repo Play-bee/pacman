@@ -23,7 +23,7 @@ export async function updateTournament(change) {
 
   const result = {
     date: change.date,
-    positionresult: 0,
+    position: 0,
     userEmail: change.email,
     userId: change.id,
     userUid: change.userUid,
